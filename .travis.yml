@@ -3,22 +3,22 @@ services:
   - docker
  
 before_install:
-  - docker build -t kfiraharon/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kaharon/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kfiraharon/react-test npm test -- --coverage
+  - docker run -e CI=true kaharon/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t kfiraharon/multi-client ./client
-  - docker build -t kfiraharon/multi-nginx ./nginx
-  - docker build -t kfiraharon/multi-server ./server
-  - docker build -t kfiraharon/multi-worker ./worker
+  - docker build -t kaharon/multi-client ./client
+  - docker build -t kaharon/multi-nginx ./nginx
+  - docker build -t kaharon/multi-server ./server
+  - docker build -t kaharon/multi-worker ./worker
 
   # push to docker hub
   # login
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push kfiraharon/multi-client
-  - docker push kfiraharon/multi-server
-  - docker push kfiraharon/multi-nginx
-  - docker push kfiraharon/multi-worker
+  - docker push kaharon/multi-client
+  - docker push kaharon/multi-server
+  - docker push kaharon/multi-nginx
+  - docker push kaharon/multi-worker
 
